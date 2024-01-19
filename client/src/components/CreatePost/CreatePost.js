@@ -2,10 +2,9 @@ import React, { useState } from 'react'
 import './CreatePost.scss'
 import Avatar from '../Avatar/Avatar'
 import backgroundImg from "../../assests/meerkat.png"
-import {BsCardImage} from "react-icons"
+import { BsCardImage } from "react-icons/bs";
 import { axiosClient } from '../../utils/axiosClient'
 import {useDispatch, useSelector} from 'react-redux'
-import { setLoading } from '../../redux/slices/appConfigSlice'
 import getUserProfile from '../../redux/slices/postSlice'
 
 function CreatePost() {
@@ -29,7 +28,6 @@ function CreatePost() {
     
     const  handlePostSubmit = async() => {
         try {
-            dispatch(setLoading(true))
             const result = await axiosClient.post('./posts', {
                 caption,
                 postImg
@@ -41,7 +39,6 @@ function CreatePost() {
         } catch (e) {
             console.log(e);
         } finally{
-            dispatch(setLoading(false))
             setCaption('')
             setPostImg('')
 
@@ -53,7 +50,7 @@ function CreatePost() {
     (
     <div className='CreatePost'>
         <div className="left-part">
-            <Avatar />
+            <Avatar  src={myProfile?.avatar?.url}/>
         </div>
         <div className="right-part">
             <input  value={caption} type="text" className='captionInput' placeholder='Whats on your mind' onChange={(e) => {setCaption(e.target.valyue)}}/>

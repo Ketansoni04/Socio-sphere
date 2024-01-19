@@ -1,6 +1,6 @@
 import React from 'react'
 import { KEY_ACCESS_TOKEN, getItem } from '../utils/LocalStorageManager'
-import { Navigate, Outlet } from 'react-router-dom'
+import { Navigate, Outlet } from 'react-router'
 
 function OnlyIfNotLoggedIn() {
  

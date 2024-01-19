@@ -1,4 +1,5 @@
  const User = require("../models/User");
+ const { json } = require("express");
 const { error, success } = require("../Uitils/responseWrapper");
 const Post = require('../models/Post');
 const { mapPostOutput } = require("../Uitils/Utils");
@@ -31,7 +32,7 @@ const followUnfollowUserController = async (req, res) => {
         await userToFollow.save();
         await curUser.save();
 
-        return res.send(success(200),{user : userToFollow})
+        return res.send(success(200,{user : userToFollow}))
     } catch (e) {
         console.log(e);
         return res.send(error(500, e.message))
@@ -45,20 +46,20 @@ const getTheFollowingPost = async (req, res) => {
 
         const fullPosts = await Post.find({
             'owner': {
-                '$in': curUser.followings
+                $in: curUser.followings
             }
         }).populate('owner')
 
-        const posts = fullPosts.map(item => mapPostOutput(item,req._id)).reverse();
-        const followingsId = curUserId.followings.map((item) => item._id)
-        followingsId.push(req._id)
+        const posts = fullPosts.map((item) => mapPostOutput(item,req._id)).reverse();
+        const followingsIds = curUser.followings.map((item) => item._id)
+        followingsIds.push(req._id)
         const notFollowingsId = await User.find({
             _id: {
-                $nin: followingsId
+                $nin: followingsIds
             }
         })
 
-        return res.send(success(200, {...curUser.doc,notFollowingsId,posts}))
+        return res.send(success(200, {...curUser._doc,notFollowingsId,posts}))
     }catch (e) {
         return res.send(error(500, e.message))
     }
@@ -94,7 +95,7 @@ const deleteProfileController = async (req,res) => {
         })
        const curUser = await User.findById(curUserId)
        curUser.remove(curUserId); 
-       return res.send(success(200, ' profile deletedf '))
+       return res.send(success(200, ' profile deleted'))
  
     } catch(e){
          return res.send(error(500,e.message))
@@ -131,27 +132,75 @@ const updateMyProfile = async (req,res) => {
                 url: cloudImg.secure_url,
                 publicId: cloudImg.public_id
             }
-            await user.save;
-            return res.send(success(200,{user}));
         }
+        await user.save;
+        return res.send(success(200,{user}));
     } catch (e) {
         return res.send(error(500,e.message));
     }
 }
-    const getUserProfile = async(req,res) => {
-        const userId = req.body.userId
-        const user = await User.findById(userId).populate({
-             path: 'post',
-             poppulate: {
-                path:  'owner'
-             }
-        }) 
+const getMyPostController = async (req, res) => {
+    try {
+        const curUserId = req._id
+        const curUser = User.findById(curUserId)
 
-        const fullPosts = user.posts
-        const posts = fullPosts.map(item => mapPostOutput(item,user._id)).reverse();
+        const posts = await Post.findOne({
+            'owner':  curUserId
 
-        return res.send(success(200,...user.doc,{posts}))
+    }).populate(likes)
+
+    return res.send(success(200, {posts}));
+    } catch (e) {
+        return res.send(error(500, e.message))
     }
+    
+}
+
+const getUserPost = async (req, res) => {
+    try {
+        const { userIdToCheckPost } = req.body;
+
+    const userToCheckPost = await User.findById(userIdToCheckPost);
+    if (!userIdToCheckPost) {
+        return res.send(error(404, 'User not found'))
+
+    }
+
+    if (!userToCheckPost) {
+        return res.send(error(404, 'User to check post not found'))
+    }
+
+    const posts = await Post.find({
+        "owner":  userIdToCheckPost
+    }).populate (likes) 
+
+    return res.send(success(200, {posts}));
+    } catch (e) {
+        return res.send(error(500,e.message))
+    }
+
+}
+const getUserProfile = async(req,res) => {
+    try {
+        const userId = req.body.userId;
+        const user = await User.findById(userId).populate({
+            path: "posts",
+            populate: {
+                path: "owner",
+            },
+        });
+
+        const fullPosts = user.posts;
+        const posts = fullPosts
+            .map((item) => mapPostOutput(item, req._id))
+            .reverse();
+
+        return res.send(success(200, { ...user._doc, posts }));
+    } catch (e) {
+        console.log('error put', e);
+        return res.send(error(500, e.message));
+    }
+}
 
 
 module.exports = {
@@ -160,5 +209,7 @@ module.exports = {
     deleteProfileController,
     getMyInfo,
     updateMyProfile,
-    getUserProfile
+    getUserProfile,
+    getMyPostController,
+    getUserPost,
 }

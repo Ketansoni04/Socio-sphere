@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react'
 import './UpdateProfile.scss'
 import { updateMyProfile } from '../../redux/slices/appConfigSlice';
 import { useDispatch, useSelector } from 'react-redux';
+import dummyImg from '../../assests/meerkat.png'
 
 
 function UpdateProfile() {
@@ -17,7 +18,7 @@ function UpdateProfile() {
     useEffect(() => {
          setName(myProfile?.name || '')
          setBio(myProfile?.bio || '')
-         setUserImg(myProfile?.avatar.url || '')
+         setUserImg(myProfile?.avatar?.url || '')
     },[myProfile])
 
     function handleImageChange(e) {
@@ -45,15 +46,15 @@ function UpdateProfile() {
             <div className="left-part">
                 <div className="input-user-img">
                     <label htmlFor="InpuImg" className='labelImg'>
-                        <img src={userImg} alt={name} />
+                        <img id = 'InputImg'src={userImg ? userImg : dummyImg} alt={name} />
                     </label>
                     <input className = "inputImg" id = "inputImg" type="file" accept='image/*' onChange={handleImageChange}/>
                 </div>
             </div>
             <div className="right-part">
-                <form>
-                    <input type="text" placeholder='Your Name' onChange={(e) => setName(e.target.value)}/>
-                    <input type="text" placeholder='Your Bio'onChange={(e) => setBio(e.target.value)}/>
+                <form onSubmit={handleSubmit}>
+                    <input value = {name} type="text" placeholder='Your Name' onChange={(e) => setName(e.target.value)}/>
+                    <input value={bio} type="text" placeholder='Your Bio'onChange={(e) => setBio(e.target.value)}/>
                     <input type="submit" className='btn-primary' onClick={handleSubmit}/>
                 </form>
 

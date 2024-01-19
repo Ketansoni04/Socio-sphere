@@ -1,51 +1,52 @@
-.Profile{
+.Profile {
     margin-top: 60px;
-    .container{
+    .container {
         display: flex;
-        gap : 20px;
+        gap: 20px;
     }
-
-    .left-part{
+    .left-part {
         flex: 2;
         overflow-y: auto;
     }
-
-    .right-part{
+    .right-part {
         flex: 1;
         margin-top: 20px;
     }
 
-    .profile-card{
+    .profile-card {
         border: 1px solid var(--border-color);
         border-radius: 4px;
         text-align: center;
         padding: 40px;
-    
-        .profile-img{
+
+        .user-img {
             width: 80px;
             height: 80px;
             border-radius: 50%;
         }
 
-        .follower-info, .user-name{
+        .user-name,
+        .follower-info {
             margin-top: 12px;
         }
 
-        .follower-info{
-            display: flex ;
+        .bio {
+            margin-top: 6px;
+        }
+
+        .follower-info {
+            display: flex;
             justify-content: center;
-            align-items: center; 
+            align-items: center;
             gap: 40px;
         }
 
-        .update-profiler{
+        .follow, .update-profile {
             margin-top: 20px;
             display: inline-block;
         }
-
-        .follow-link{
+        .follow-link {
             color: var(--accent-color);
         }
     }
-
 }

@@ -7,28 +7,27 @@ import { getFeedData } from '../../redux/slices/feedDataSlice'
 
 function Feed() {
   
-
-  const feedData = useSelector(state => state.feedDataReducer.feedData  )
-  const diapatch = useDispatch()
+  const feedData = useSelector((state) => state.feedDataReducer.feedData  )
+  const dispatch = useDispatch()
 
   useEffect(() => {
-    diapatch(getFeedData())
-  },[diapatch])
+    dispatch(getFeedData())
+  },[dispatch])
   
   return (
     <div className='Feed'>
         <div className='container'>
-            <div className='right-part'>
+            <div className='left-part'>
               {feedData?.posts?.map(post => <Post key = {post._id} post={post} />)}
             </div>
-            <div className='left-part'>
+            <div className='right-part'>
                 <div className='following'>
                   <h3 className='title'>You are Following</h3>
-                     {feedData?.followers?.map(user => <Follower user={user} />)}
+                     {feedData?.followings?.map(user => <Follower key = {user._id}   user={user} />)}
                 </div>
                 <div className='suggestions'>
                   <h3 className='title'>Suggestions</h3>
-                  {feedData?.notFollowersId?.map(user => <Follower user={user} />)}
+                  {feedData?.notFollowingsId?.map(user => <Follower key = {user._id} user={user} />)}
                 </div>
             </div>
         </div>

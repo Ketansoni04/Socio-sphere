@@ -1,29 +1,27 @@
 Feed {
+    margin-top: 60px;
+    
     .container{
         display: flex;
         gap : 20px;
-        justify-content: center;
-    
+    }
 
-        .left-part{
-            flex: 2;
-            overflow-y: auto;
-        }
+    .left-part{
+        flex: 2;
+        overflow-y: auto;
+     }
 
-        .right-part{
-            flex: 1;
-            margin-top: 20px;
+    .right-part{
+        flex: 1;
+        margin-top: 20px;
+     }
 
-            .suggestions {
-                margin-top: 40px;
-            }
-    
-            .title{
-                margin-bottom: 12px;
-            }
-        }
+    .suggestions {
+        margin-top: 40px;
+    }
+
+    .title{
+        margin-bottom: 12px;
+    }
         
-}
-
-    
 }

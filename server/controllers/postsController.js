@@ -3,22 +3,7 @@ const User = require("../models/User");
 const { success, error } = require("../Uitils/responseWrapper");
 
 
-const getMyPostController = async (req, res) => {
-    try {
-        const curUserId = req._id
-        const curUser = User.findById(curUserId)
 
-        const posts = await Post.findOne({
-            'owner':  curUserId
-
-    }).populate(likes)
-
-    return res.send(success(200, {posts}));
-    } catch (e) {
-        return res.send(error(500, e.message))
-    }
-    
-}
 
 const createPostController = async (req, res) => {
     try {
@@ -85,7 +70,7 @@ const deletePostController = async (req, res) => {
     
     try {
         const {postId} = req.body
-    const curUserId = req._id
+        const curUserId = req._id
 
     const curUser = await User.findById(curUserId)
     const post = await Post.findById(postId)
@@ -140,30 +125,7 @@ const updatePostController = async (req, res) => {
     }
 }
 
-const getUserPost = async (req, res) => {
-        try {
-            const { userIdToCheckPost } = req.body;
 
-        const userToCheckPost = await User.findById(userIdToCheckPost);
-        if (!userIdToCheckPost) {
-            return res.send(error(404, 'User not found'))
-
-        }
-
-        if (!userToCheckPost) {
-            return res.send(error(404, 'User to check post not found'))
-        }
-
-        const posts = await Post.find({
-            "owner":  userIdToCheckPost
-        }).populate (likes) 
-
-        return res.send(success(200, {posts}));
-        } catch (e) {
-            return res.send(error(500,e.message))
-        }
-
-}
 
 
 
@@ -173,10 +135,8 @@ const getUserPost = async (req, res) => {
 
 
 module.exports = {
-        getUserPost,
         createPostController,
         likeAndUnlikePost,
         updatePostController,
         deletePostController,
-        getMyPostController,
     }
