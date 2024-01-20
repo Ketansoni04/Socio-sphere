@@ -5,7 +5,7 @@ import './Profile.scss'
 import { useNavigate, useParams } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux'
 import { getUserProfile } from '../../redux/slices/postSlice'
-import { followAndUnfollow } from '../../redux/slices/feedDataSlice'
+import { followAndUnfollowUser } from '../../redux/slices/feedDataSlice'
 
 function Profile() {
   
@@ -29,7 +29,7 @@ function Profile() {
      },[params.userId,myProfile,feedData])
 
      function handleUserFollow() {
-        dispatch(followAndUnfollow({
+        dispatch(followAndUnfollowUser({
           userIdToFollow : params.userId
         }))
       }

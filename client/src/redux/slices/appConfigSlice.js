@@ -24,7 +24,7 @@ const appConfigSlice = createSlice({
     initialState: {
         isLoading: false,
         toastData: {},
-        myProfile: null
+        myProfile: null,
     },
     reducers: {
         setLoading: (state,action) => {
