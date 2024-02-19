@@ -1,9 +1,10 @@
 import React, { useEffect, useState } from 'react'
 import Avatar from '../Avatar/Avatar'
 import './Follower.scss'
-import { useNavigate } from 'react-router-dom'
+import { useNavigate, useParams } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux'
 import { followAndUnfollowUser, getFeedData } from '../../redux/slices/feedDataSlice'
+
 
 
 function Follower({user}) {
@@ -20,6 +21,7 @@ function Follower({user}) {
     dispatch(followAndUnfollowUser({
       userIdToFollow : user._id
     }))
+   dispatch(getFeedData())
   }
 
 

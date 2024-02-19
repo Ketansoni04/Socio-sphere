@@ -7,7 +7,7 @@ import { getFeedData } from '../../redux/slices/feedDataSlice'
 
 function Feed() {
   
-  const feedData = useSelector((state) => state.feedDataReducer.feedData  )
+  const feedData = useSelector((state) => state?.feedDataReducer?.feedData  )
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -18,7 +18,7 @@ function Feed() {
     <div className='Feed'>
         <div className='container'>
             <div className='left-part'>
-              {feedData?.posts?.map(post => <Post key = {post._id} post={post} />)}
+              {feedData?.posts?.map(post => <Post key = {post?._id} post={post} />)}
             </div>
             <div className='right-part'>
                 <div className='following'>

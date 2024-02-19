@@ -56,8 +56,9 @@ function App() {
                         <Route path="/" element={<Feed />} />
                         <Route path="/post" element={<Post />} />
                         <Route path="/profile/:userId" element={<Profile />} />
-                        <Route path="/updateProfile" element={<UpdateProfile />} />
+                        <Route path="/profile/:userId/updateProfile" element={<UpdateProfile />} />
                     </Route>
+                    
                 </Route>
                 <Route element={<OnlyIfNotLoggedIn />} >
                     <Route path='/login' element={<Login />} />

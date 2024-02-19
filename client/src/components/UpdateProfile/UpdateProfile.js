@@ -45,8 +45,8 @@ function UpdateProfile() {
         <div className="container">
             <div className="left-part">
                 <div className="input-user-img">
-                    <label htmlFor="InpuImg" className='labelImg'>
-                        <img id = 'InputImg'src={userImg ? userImg : dummyImg} alt={name} />
+                    <label htmlFor="inputImg" className='labelImg'>
+                        <img id = 'inputImg'src={userImg ? userImg : dummyImg} alt={name} />
                     </label>
                     <input className = "inputImg" id = "inputImg" type="file" accept='image/*' onChange={handleImageChange}/>
                 </div>

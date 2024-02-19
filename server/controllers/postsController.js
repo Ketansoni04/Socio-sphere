@@ -1,6 +1,8 @@
 const Post = require("../models/Post");
 const User = require("../models/User");
 const { success, error } = require("../Uitils/responseWrapper");
+const { mapPostOutput } = require("../Uitils/Utils");
+const cloudinary = require("cloudinary").v2
 
 
 
@@ -16,7 +18,7 @@ const createPostController = async (req, res) => {
             folder: 'postImg'
         })
 
-        const owner = await req._idp
+        const owner = await req._id
 
         const user = await User.findById(req._id)
         const post = await Post.create({
@@ -36,7 +38,6 @@ const createPostController = async (req, res) => {
 
     }
     catch (e) {
-  
         return res.send(error(500, e.message))
     }
 }
@@ -46,7 +47,7 @@ const likeAndUnlikePost = async (req, res) => {
         const { postId } = req.body;
     const curUserId = req._id
 
-    const post = await Post.findById(postId).poppulate('owner');
+    const post = await Post.findById(postId).populate('owner');
     if (!post) {
         return res.send(error(404, 'post not found'))
     }

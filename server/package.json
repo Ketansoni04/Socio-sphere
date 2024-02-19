@@ -11,7 +11,7 @@
   "license": "ISC",
   "dependencies": {
     "bcrypt": "^5.1.0",
-    "cloudinary": "^1.41.1",
+    "cloudinary": "^1.41.3",
     "cookie-parser": "^1.4.6",
     "cors": "^2.8.5",
     "dotenv": "^16.0.3",
@@ -19,6 +19,14 @@
     "jsonwebtoken": "^9.0.0",
     "mongoose": "^6.8.2",
     "morgan": "^1.10.0",
+    "node-time-ago": "^1.0.0",
     "time-ago": "^0.2.1"
+  },
+  "typeRoots": [
+    "./typings",
+    "./node_modules/@types/"
+  ],
+  "devDependencies": {
+    "typescript": "^5.3.3"
   }
 }

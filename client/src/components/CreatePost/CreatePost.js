@@ -4,7 +4,7 @@ import Avatar from '../Avatar/Avatar'
 import { BsCardImage } from "react-icons/bs";
 import { axiosClient } from '../../utils/axiosClient'
 import {useDispatch, useSelector} from 'react-redux'
-import getUserProfile from '../../redux/slices/postSlice'
+import { getUserProfile } from '../../redux/slices/postSlice';
 
 function CreatePost() {
     const dispatch = useDispatch()
@@ -36,8 +36,8 @@ function CreatePost() {
             dispatch(getUserProfile({
                 userId: myProfile?._id
             }))
-        } catch (e) {
-            console.log(e);
+        } catch (error) {
+            console.log(error);
         } finally{
             setCaption('')
             setPostImg('')

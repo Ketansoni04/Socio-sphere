@@ -133,7 +133,7 @@ const updateMyProfile = async (req,res) => {
                 publicId: cloudImg.public_id
             }
         }
-        await user.save;
+        await user.save();
         return res.send(success(200,{user}));
     } catch (e) {
         return res.send(error(500,e.message));

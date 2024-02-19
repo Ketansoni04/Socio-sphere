@@ -13,7 +13,7 @@
             align-items: center;
             justify-content: center;
 
-            .label-img{
+            .labelImg{
                 width: 80px;
                 height: 80px;
                 border-radius: 50%;
@@ -38,7 +38,7 @@
         flex: 3;
 
 
-        .input{
+        input{
             display: block;
             padding: 4px 8px;
             width: 100%;
@@ -51,7 +51,7 @@
             }
         }
 
-        .delete-Account{
+        .delete-account{
             margin-top: 16px;
             background-color: red;
         }

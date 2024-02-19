@@ -5,7 +5,7 @@ import { likeAndUnlikePost } from './postSlice';
 
 
 export const getFeedData = createAsyncThunk('user/getFeedData', async () => {
-    try {
+    try { 
         const response = await axiosClient.get('/user/getFeedData')
         return response.result;
     } catch (e) {
@@ -36,14 +36,14 @@ const feedSlice = createSlice({
         }).addCase(likeAndUnlikePost.fulfilled, (state,action) => {
             const post = action.payload
             const index = state?.feedData?.posts?.findIndex((item) => item._id === post._id)
-            if( index != -1 && index != undefined){
+            if( index !== -1 && index !== undefined){
                 state.feedData.posts[index] = post;
             }
 
         }).addCase(followAndUnfollowUser.fulfilled,(state,action)=> {
             const user = action.payload 
             const index = state?.feedData?.followings?.findIndex((item) => item._id === user._id)
-             if(index != -1){
+             if(index !== -1){
                 state?.feedData?.followings?.splice(index,1);
              }
              else{
