@@ -42,7 +42,7 @@ const followUnfollowUserController = async (req, res) => {
 const getTheFollowingPost = async (req, res) => {
     try {
         const curUserId = req._id
-        const curUser = await User.findById(curUserId)
+        const curUser = await User.findById(curUserId).populate('followings')
 
         const fullPosts = await Post.find({
             'owner': {
@@ -50,7 +50,7 @@ const getTheFollowingPost = async (req, res) => {
             }
         }).populate('owner')
 
-        const posts = fullPosts.map((item) => mapPostOutput(item,req._id)).reverse();
+       const posts = fullPosts.map((item) => mapPostOutput(item,req._id)).reverse();
         const followingsIds = curUser.followings.map((item) => item._id)
         followingsIds.push(req._id)
         const notFollowingsId = await User.find({

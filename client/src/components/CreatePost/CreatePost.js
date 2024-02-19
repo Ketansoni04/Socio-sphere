@@ -1,7 +1,6 @@
 import React, { useState } from 'react'
 import './CreatePost.scss'
 import Avatar from '../Avatar/Avatar'
-import backgroundImg from "../../assests/meerkat.png"
 import { BsCardImage } from "react-icons/bs";
 import { axiosClient } from '../../utils/axiosClient'
 import {useDispatch, useSelector} from 'react-redux'
@@ -13,15 +12,16 @@ function CreatePost() {
     const [postImg,setPostImg] = useState("");
     const [caption,setCaption] = useState("")
 
-    const myProfile = useSelector(state => state.appConfigReducer.myProfile)
+    const myProfile = useSelector((state) => state.appConfigReducer.myProfile)
 
-    function handleImageChange(e){
+    const handleImageChange = (e) => {
         const file = e.target.files[0]
         const fileReader = new FileReader();
         fileReader.readAsDataURL(file)
         fileReader.onload = () => {
             if(fileReader.readyState === fileReader.DONE){
                 setPostImg(fileReader.result);
+                console.log("img data", fileReader.result);
             }
         }
     }
@@ -47,19 +47,19 @@ function CreatePost() {
     
     }
     
-    (
+    return (
     <div className='CreatePost'>
         <div className="left-part">
             <Avatar  src={myProfile?.avatar?.url}/>
         </div>
         <div className="right-part">
-            <input  value={caption} type="text" className='captionInput' placeholder='Whats on your mind' onChange={(e) => {setCaption(e.target.valyue)}}/>
-            {postImg && <div className="img-container">
-                <img src={backgroundImg} alt=""  className='post-img'/>
-            </div>}
+            <input  value={caption} type="text" className='captionInput' placeholder='Whats on your mind' onChange={(e) => {setCaption(e.target.value)}}/>
+            {postImg && (<div className="img-container">
+                <img src={postImg} alt="post-img"  className='post-img'/>
+            </div>)}
             <div className="bottom-part">
                 <div className="input-post-img">
-                <label htmlFor="InpuImg" className='labelImg'>
+                <label htmlFor="inputImg" className='labelImg'>
                         <BsCardImage />
                     </label>
                     <input className = "inputImg" id = "inputImg" type="file" accept='image/*' onChange={handleImageChange}/>

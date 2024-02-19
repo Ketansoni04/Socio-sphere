@@ -8,7 +8,7 @@ import { getFeedData } from '../../redux/slices/feedDataSlice'
 function Feed() {
   
   const feedData = useSelector((state) => state.feedDataReducer.feedData  )
-  const dispatch = useDispatch()
+  const dispatch = useDispatch();
 
   useEffect(() => {
     dispatch(getFeedData())

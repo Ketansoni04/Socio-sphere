@@ -26,7 +26,7 @@ function Post({post}) {
   return (
     <div className='Post'>
       <div className='heading' onClick={() => navigate(`/profile/${post.owner._id}`)}> 
-            <Avatar src={post.owner.avatar.url}/>
+            <Avatar src={post?.owner?.avatar?.url}/>
             <h4>{post?.owner?.name}</h4>
       </div>
       <div className='content'>
@@ -34,11 +34,11 @@ function Post({post}) {
       </div>
       <div className='footer'>
          <div className='like' onClick={handlePostLiked}>
-           {post.isLiked ? <AiFillHeart  style={{color: "red"}} className = 'icon'/> : <AiOutlineHeart  className='icon'/>}
-            <h4>{post.likeCount} </h4>
+           {post.isLiked ? (<AiFillHeart  style={{color: "red"}} className = 'icon'/>) : (<AiOutlineHeart  className='icon'/>)}
+            <h4>{post?.likeCount} </h4>
          </div>
-         <p className="caption"></p>
-         <h6 className="time-ago">post?.timeAgo</h6>
+         <p className="caption">{post?.caption}</p>
+         <h6 className="time-ago">{post?.timeAgo}</h6>
       </div>
     </div>
   )
