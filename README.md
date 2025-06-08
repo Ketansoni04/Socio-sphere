@@ -1,6 +1,50 @@
-Developed a social media website enabling users to seamlessly create posts, follow/unfollow users, and express appreciation through post likes.
+# 🌐 Socio-Sphere – A Full-Stack Social Media Platform
 
-- Made it secure with robust user authentication and implemented user-friendly features. 
-- API testing is done with the help of Insomia. 
-- Technology – ReactJS, Redux, NodeJS, MongoDB
+**Socio-Sphere** is a social media web application where people can post thier images, share updates, follow others, and engage with posts. It features a robust backend — built with the MERN stack, Redux, Axios, and Cloudinary integration.
+
+---
+
+## ✨ Features
+
+- 🔐 **User Authentication & Authorization**
+  - Secure sign-up and login with JWT
+  - Protected user routes and sessions
+
+- 📸 **Post Creation & Interaction**
+  - Create posts with image and content
+  - Like your own or others' posts
+  - View followers' posta
+  - Navigate to other users’ profiles directly from posts.
+
+- 👥 **Follow System**
+  - Follow or unfollow other users
+  - View lists of followers.
+  - Friend suggestions to grow connections
+
+- 👤 **User Profile**
+  - View and edit profile image, bio and create posts.
+
+- 🖼️ **Media Uploads with Cloudinary**
+  - Profile and post images securely stored via Cloudinary
+---
+
+## 🧰 Tech Stack
+
+### Frontend:
+- **React.js**
+- **Redux** – State management
+- **Axios** – API requests
+
+### Backend:
+- **Node.js**
+- **Express.js**
+
+### Database:
+- **MongoDB** with **Mongoose**
+
+### Media Storage:
+- **Cloudinary**
+
+---
+
 
